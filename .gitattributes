@@ -1,0 +1,7 @@
+# Normalize text files while preserving Windows line endings for scripts and INI files.
+* text=auto
+*.ahk text eol=crlf
+*.ini text eol=crlf
+*.iss text eol=crlf
+*.ps1 text eol=crlf
+*.md text eol=lf

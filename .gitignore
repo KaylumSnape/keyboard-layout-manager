@@ -1,0 +1,15 @@
+# User-specific application state
+KeyboardLayoutManager.ini
+
+# Generated release artifacts
+release/
+
+# Local AutoHotkey build output
+*.exe
+*.zip
+
+# Editor and operating-system files
+.vscode/
+*.log
+Thumbs.db
+Desktop.ini
