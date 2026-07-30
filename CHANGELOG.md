@@ -2,6 +2,12 @@
 
 All notable changes to Keyboard Layout Manager are documented in this file.
 
+## [1.1.3] - 2026-07-30
+
+### Added
+
+- Custom transparent application icon for the tray, executable, shortcuts, and installer.
+
 ## [1.1.2] - 2026-07-30
 
 ### Added

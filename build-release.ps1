@@ -34,6 +34,7 @@ if ([string]::IsNullOrWhiteSpace($Version))
 }
 
 $defaultConfig = Join-Path $projectRoot 'KeyboardLayoutManager.default.ini'
+$iconFile = Join-Path $projectRoot 'assets\KeyboardLayoutManager.ico'
 $outputRoot = Join-Path $projectRoot 'release'
 $packageName = "KeyboardLayoutManager-$Version"
 $packageDirectory = Join-Path $outputRoot $packageName
@@ -46,12 +47,17 @@ if (Select-String -Path $sourceScript -Pattern '^global DEBUG_MODE := true$' -Qu
     throw 'Set DEBUG_MODE to false before creating a distribution build.'
 }
 
+if (-not (Test-Path $iconFile -PathType Leaf))
+{
+    throw "Application icon was not found: $iconFile"
+}
+
 Remove-Item -Path $packageDirectory -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $archivePath -Force -ErrorAction SilentlyContinue
 New-Item -Path $packageDirectory -ItemType Directory -Force | Out-Null
 
 $executablePath = Join-Path $packageDirectory 'KeyboardLayoutManager.exe'
-$compilerArguments = '/in "{0}" /out "{1}" /base "{2}"' -f $sourceScript, $executablePath, $RuntimePath
+$compilerArguments = '/in "{0}" /out "{1}" /base "{2}" /icon "{3}"' -f $sourceScript, $executablePath, $RuntimePath, $iconFile
 $compilerProcess = Start-Process -FilePath $CompilerPath -ArgumentList $compilerArguments -Wait -PassThru
 if ($compilerProcess.ExitCode -ne 0 -or -not (Test-Path $executablePath -PathType Leaf))
 {
@@ -59,6 +65,8 @@ if ($compilerProcess.ExitCode -ne 0 -or -not (Test-Path $executablePath -PathTyp
 }
 
 Copy-Item -Path $defaultConfig -Destination (Join-Path $packageDirectory 'KeyboardLayoutManager.ini')
+New-Item -Path (Join-Path $packageDirectory 'assets') -ItemType Directory -Force | Out-Null
+Copy-Item -Path $iconFile -Destination (Join-Path $packageDirectory 'assets\KeyboardLayoutManager.ico') -Force
 Copy-Item -Path (Join-Path $projectRoot 'README.md') -Destination $packageDirectory
 Compress-Archive -Path $packageDirectory -DestinationPath $archivePath
 

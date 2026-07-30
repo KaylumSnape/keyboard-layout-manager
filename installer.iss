@@ -1,5 +1,5 @@
 #ifndef AppVersion
-  #define AppVersion "1.1.2"
+  #define AppVersion "1.1.3"
 #endif
 
 #ifndef SourceDir
@@ -29,6 +29,7 @@ OutputBaseFilename=KeyboardLayoutManager-Setup-{#AppVersion}
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
+SetupIconFile={#SourceDir}\assets\KeyboardLayoutManager.ico
 CloseApplications=yes
 RestartApplications=no
 UninstallDisplayIcon={app}\{#AppExeName}
@@ -36,6 +37,7 @@ UninstallDisplayIcon={app}\{#AppExeName}
 [Files]
 Source: "{#SourceDir}\KeyboardLayoutManager.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourceDir}\KeyboardLayoutManager.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
+Source: "{#SourceDir}\assets\KeyboardLayoutManager.ico"; DestDir: "{app}\assets"; Flags: ignoreversion
 Source: "{#SourceDir}\README.md"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]

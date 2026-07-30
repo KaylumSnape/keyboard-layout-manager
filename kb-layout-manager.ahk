@@ -4,7 +4,7 @@ Persistent
 
 ; ============================================================================
 ; Keyboard Layout Manager
-; Version: 1.1.2
+; Version: 1.1.3
 ;
 ; Automatically selects the configured preferred layout when a configured
 ; keyboard is connected, and the default layout when it is not.
@@ -20,15 +20,19 @@ global DEBUG_MODE := false
 global LANG_US := 0x0409
 global LANG_UK := 0x0809
 global APP_NAME := "Keyboard Layout Manager"
-global APP_VERSION := "1.1.2"
+global APP_VERSION := "1.1.3"
 global APP_MENU_TITLE := APP_NAME " (v" APP_VERSION ")"
+global APP_ICON_FILE := A_ScriptDir "\assets\KeyboardLayoutManager.ico"
 global CONFIG_FILE := A_ScriptDir "\KeyboardLayoutManager.ini"
 global STARTUP_SHORTCUT := A_Startup "\KeyboardLayoutManager.lnk"
 global Settings := Map()
 global PreferredKeyboardIds := []
 global LastAppliedLayout := ""
 
-TraySetIcon()
+if FileExist(APP_ICON_FILE)
+{
+    TraySetIcon(APP_ICON_FILE)
+}
 A_IconHidden := false
 A_IconTip := APP_NAME " v" APP_VERSION
 

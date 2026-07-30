@@ -1,6 +1,22 @@
 # Keyboard Layout Manager
 
-Keyboard Layout Manager selects a Windows keyboard layout based on whether a configured external keyboard is connected.
+Keyboard Layout Manager automatically selects the appropriate Windows keyboard layout for a configured external keyboard and restores that choice after Windows resets the input language.
+
+## Why It Is Needed
+
+Windows can revert the selected input language to the default layout after a device is locked or restarted.
+
+This utility detects keyboard and session changes, then automatically reapplies the appropriate layout so the desired input state is retained.
+
+## Use Case
+
+Use a UK laptop keyboard on the move and a US external keyboard at your desk. Keyboard Layout Manager automatically applies UK when the external keyboard is disconnected and US when the configured keyboard is connected, including after lock/unlock.
+
+## What It Does
+
+- Runs from the Windows system tray and responds to keyboard and session events.
+- Identifies one or more US keyboards through a guided unplug/reconnect setup.
+- Stores editable settings beside the application and can start automatically when you sign in.
 
 ## Installation
 
@@ -19,9 +35,10 @@ Extract the ZIP to a user-writable folder such as `%LOCALAPPDATA%\Keyboard Layou
 ## First Run
 
 1. Ensure both the UK and US Windows keyboard layouts are installed.
-2. Run `KeyboardLayoutManager.exe`.
-3. Right-click its system-tray icon and select `Add Connected US Keyboard...`.
-4. Follow the unplug/reconnect prompts. Confirm the newly detected keyboard to save its VID/PID in `KeyboardLayoutManager.ini`.
+2. Install **Keyboard Layout Manager** by running `KeyboardLayoutManager-Setup-<version>.exe`. Leave the launch option selected at the end of setup.
+3. Find the **Keyboard Layout Manager** icon in the system tray. Windows may place it in the tray overflow (`^`) menu initially, or hide it and require you to go to `Taskbar setting` > `Other system tray icons`.
+4. Right-click the icon and select `Add Connected US Keyboard...`.
+5. Follow the unplug/reconnect prompts and confirm the detected keyboard.
 
 The tray menu also provides `Check Now`, `Show Status`, `Open Configuration File`, keyboard detection and setup, notification/startup toggles, reload, and exit.
 
