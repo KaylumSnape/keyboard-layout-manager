@@ -2,6 +2,19 @@
 
 All notable changes to Keyboard Layout Manager are documented in this file.
 
+## [1.1.5] - 2026-07-30
+
+### Added
+
+- `View on GitHub` system-tray action linking to the project repository.
+
+## [1.1.4] - 2026-07-30
+
+### Changed
+
+- Windows Installed Apps now shows Keyboard Layout Manager without its version number.
+- Installer and project metadata now identify Kaylum Snape and link to the GitHub profile.
+
 ## [1.1.3] - 2026-07-30
 
 ### Added

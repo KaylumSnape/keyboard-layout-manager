@@ -1,5 +1,5 @@
 #ifndef AppVersion
-  #define AppVersion "1.1.3"
+  #define AppVersion "1.1.5"
 #endif
 
 #ifndef SourceDir
@@ -11,14 +11,18 @@
 #endif
 
 #define AppName "Keyboard Layout Manager"
-#define AppPublisher ""
+#define AppPublisher "Kaylum Snape"
+#define AppPublisherUrl "https://github.com/KaylumSnape"
 #define AppExeName "KeyboardLayoutManager.exe"
 
 [Setup]
 AppId={{A1E6B1B7-71D1-494A-8E4B-49C42D7A11E6}
 AppName={#AppName}
 AppVersion={#AppVersion}
+AppVerName={#AppName}
 AppPublisher={#AppPublisher}
+AppPublisherURL={#AppPublisherUrl}
+AppSupportURL={#AppPublisherUrl}
 DefaultDirName={localappdata}\Keyboard Layout Manager
 DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
@@ -32,6 +36,7 @@ WizardStyle=modern
 SetupIconFile={#SourceDir}\assets\KeyboardLayoutManager.ico
 CloseApplications=yes
 RestartApplications=no
+UninstallDisplayName={#AppName}
 UninstallDisplayIcon={app}\{#AppExeName}
 
 [Files]

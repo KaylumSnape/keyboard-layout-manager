@@ -62,6 +62,10 @@ To also create the installer, install Inno Setup 6 and supply its compiler path:
 
 The script derives its release version from `APP_VERSION` in the source file. It uses the installed AutoHotkey v2 64-bit runtime by default. Supply `-RuntimePath` only when it is installed elsewhere or a 32-bit release is needed. It creates a matching ZIP and, when Inno Setup is supplied, installer. It refuses to build while `DEBUG_MODE` is set to `true` in the source script.
 
+## Author
+
+Created by [Kaylum Snape](https://github.com/KaylumSnape).
+
 ## License
 
 Released under the [MIT License](LICENSE).

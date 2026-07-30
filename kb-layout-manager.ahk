@@ -4,7 +4,7 @@ Persistent
 
 ; ============================================================================
 ; Keyboard Layout Manager
-; Version: 1.1.3
+; Version: 1.1.5
 ;
 ; Automatically selects the configured preferred layout when a configured
 ; keyboard is connected, and the default layout when it is not.
@@ -20,8 +20,9 @@ global DEBUG_MODE := false
 global LANG_US := 0x0409
 global LANG_UK := 0x0809
 global APP_NAME := "Keyboard Layout Manager"
-global APP_VERSION := "1.1.3"
+global APP_VERSION := "1.1.5"
 global APP_MENU_TITLE := APP_NAME " (v" APP_VERSION ")"
+global PROJECT_URL := "https://github.com/KaylumSnape/keyboard-layout-manager"
 global APP_ICON_FILE := A_ScriptDir "\assets\KeyboardLayoutManager.ico"
 global CONFIG_FILE := A_ScriptDir "\KeyboardLayoutManager.ini"
 global STARTUP_SHORTCUT := A_Startup "\KeyboardLayoutManager.lnk"
@@ -91,6 +92,7 @@ CreateTrayMenu()
     A_TrayMenu.Add("Check Now", CheckNow)
     A_TrayMenu.Add("Show Status", ShowStatus)
     A_TrayMenu.Add("Open Configuration File", OpenConfigurationFile)
+    A_TrayMenu.Add("View on GitHub", OpenProjectPage)
     A_TrayMenu.Add("Detect Connected Keyboards", ShowConnectedKeyboards)
     A_TrayMenu.Add("Add Connected US Keyboard...", AddPreferredKeyboard)
     A_TrayMenu.Add()
@@ -310,6 +312,13 @@ OpenConfigurationFile(*)
     global CONFIG_FILE
 
     Run(CONFIG_FILE)
+}
+
+OpenProjectPage(*)
+{
+    global PROJECT_URL
+
+    Run(PROJECT_URL)
 }
 
 ShowConnectedKeyboards(*)
