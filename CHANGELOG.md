@@ -2,6 +2,17 @@
 
 All notable changes to Keyboard Layout Manager are documented in this file.
 
+## [1.1.6] - 2026-10-27
+
+### Added
+
+- Startup-only keyboard re-check window to handle delayed USB hub/device enumeration after sign-in.
+- New configuration options: `StartupCheckIntervalMs` and `StartupCheckDurationMs`.
+
+### Changed
+
+- Startup re-check defaults tuned for low overhead: every 5 seconds for 3 minutes.
+
 ## [1.1.5] - 2026-07-30
 
 ### Added

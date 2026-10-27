@@ -46,6 +46,13 @@ The tray menu also provides `Check Now`, `Show Status`, `Open Configuration File
 
 `KeyboardLayoutManager.ini` is the only configuration file. It documents all available settings. After editing it manually, select `Reload` in the tray menu.
 
+Startup reliability defaults are designed to stay light on system overhead:
+
+- `StartupCheckIntervalMs=5000`
+- `StartupCheckDurationMs=180000`
+
+These settings run additional checks only during startup, then stop automatically.
+
 ## Building A Release
 
 Install the official AutoHotkey v2 compiler (`Ahk2Exe`), then run the following from this folder:

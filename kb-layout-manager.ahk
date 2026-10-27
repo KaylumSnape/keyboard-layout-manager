@@ -4,7 +4,7 @@ Persistent
 
 ; ============================================================================
 ; Keyboard Layout Manager
-; Version: 1.1.5
+; Version: 1.1.6
 ;
 ; Automatically selects the configured preferred layout when a configured
 ; keyboard is connected, and the default layout when it is not.
@@ -20,7 +20,7 @@ global DEBUG_MODE := false
 global LANG_US := 0x0409
 global LANG_UK := 0x0809
 global APP_NAME := "Keyboard Layout Manager"
-global APP_VERSION := "1.1.5"
+global APP_VERSION := "1.1.6"
 global APP_MENU_TITLE := APP_NAME " (v" APP_VERSION ")"
 global PROJECT_URL := "https://github.com/KaylumSnape/keyboard-layout-manager"
 global APP_ICON_FILE := A_ScriptDir "\assets\KeyboardLayoutManager.ico"
@@ -79,6 +79,29 @@ InitializeApplication()
 
     ; Perform the initial check after Windows has settled.
     ScheduleCheck(500)
+    StartStartupChecks()
+}
+
+StartStartupChecks()
+{
+    global Settings
+
+    intervalMs := Settings["StartupCheckIntervalMs"]
+    durationMs := Settings["StartupCheckDurationMs"]
+
+    if (intervalMs < 250 || durationMs < intervalMs)
+    {
+        return
+    }
+
+    ; Periodically re-check during startup to catch delayed USB hub/device enumeration.
+    SetTimer(CheckKeyboard, intervalMs)
+    SetTimer(StopStartupChecks, -durationMs)
+}
+
+StopStartupChecks()
+{
+    SetTimer(CheckKeyboard, 0)
 }
 
 CreateTrayMenu()
@@ -142,6 +165,8 @@ LoadConfiguration()
         "NotificationDurationMs", ReadIntegerSetting("General", "NotificationDurationMs", 3000),
         "LayoutSwitchRetryDelayMs", Max(50, ReadIntegerSetting("General", "LayoutSwitchRetryDelayMs", 250)),
         "LayoutSwitchMaxAttempts", Max(1, ReadIntegerSetting("General", "LayoutSwitchMaxAttempts", 3)),
+        "StartupCheckIntervalMs", Max(0, ReadIntegerSetting("General", "StartupCheckIntervalMs", 5000)),
+        "StartupCheckDurationMs", Max(0, ReadIntegerSetting("General", "StartupCheckDurationMs", 180000)),
         "RunAtStartup", ReadBooleanSetting("General", "RunAtStartup", true),
         "DefaultLayout", ReadLayoutSetting("Layouts", "DefaultLayout", "UK"),
         "PreferredLayout", ReadLayoutSetting("Layouts", "PreferredLayout", "US")
@@ -181,6 +206,11 @@ EnsureConfigurationFile()
         . "LayoutSwitchRetryDelayMs=250`n"
         . "; Number of layout-switch attempts. Three is normally sufficient.`n"
         . "LayoutSwitchMaxAttempts=3`n"
+        . "; During startup, re-check keyboards every N milliseconds to catch delayed USB enumeration.`n"
+        . "; Set to 0 to disable startup checks.`n"
+        . "StartupCheckIntervalMs=5000`n"
+        . "; Total startup check window in milliseconds (180000 = 3 minutes).`n"
+        . "StartupCheckDurationMs=180000`n"
         . "; Create or remove the Startup-folder shortcut automatically.`n"
         . "RunAtStartup=true`n`n"
         . "[Layouts]`n"
